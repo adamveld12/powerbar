@@ -1,0 +1,80 @@
+version: v1.0
+name: Go
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+  containers:
+    - name: main
+      image: archlinux
+blocks:
+  - name: lint
+    task:
+      jobs:
+        - name: lint
+          commands:
+            - make lint
+      prologue:
+        commands:
+          - sem-version go 1.14
+          - export GO111MODULE=on
+          - export GOPATH=~/go
+          - 'export PATH=/home/semaphore/go/bin:$PATH'
+          - checkout
+          - go get ./...
+    dependencies: []
+  - name: test
+    task:
+      jobs:
+        - name: test
+          commands:
+            - make test
+      prologue:
+        commands:
+          - sem-version go 1.14
+          - export GO111MODULE=on
+          - export GOPATH=~/go
+          - 'export PATH=/home/semaphore/go/bin:$PATH'
+          - checkout
+          - go get ./...
+    dependencies: []
+  - name: build
+    task:
+      jobs:
+        - name: build
+          commands:
+            - make build
+      prologue:
+        commands:
+          - sem-version go 1.14
+          - export GO111MODULE=on
+          - export GOPATH=~/go
+          - 'export PATH=/home/semaphore/go/bin:$PATH'
+          - checkout
+          - go get ./...
+    dependencies:
+      - lint
+      - test
+  - name: package
+    task:
+      jobs:
+        - name: makepkg
+          commands:
+            - make pkg
+      prologue:
+        commands:
+          - sem-version go 1.14
+          - export GO111MODULE=on
+          - export GOPATH=~/go
+          - 'export PATH=/home/semaphore/go/bin:$PATH'
+          - checkout
+          - go get ./...
+      epilogue:
+          commands:
+            - artifact push job aur/PKGBUILD
+            - artifact push job aur/.SRCINFO
+
+
+    dependencies:
+      - build
+
