@@ -1,2 +1,2 @@
 [submodule "aur"]
-	url = ssh://aur@aur.archlinux.orgpowerbar.git
+	url = ssh://aur@aur.archlinux.org/powerbar.git

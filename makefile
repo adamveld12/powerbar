@@ -45,7 +45,7 @@ test: lint
 	go test -v -cover $(PKGS)
 
 clean: $(clean_list)
-	rm -rf $<  aur/src aur/pkg aur/$(app)
+	rm -rf $<  aur/src aur/pkg aur/$(app) aur/*.xz aur/PKGBUILD aur/.SRCINFO
 
 install-local: build
 	cp $(BINARY) $${HOME}/.config/waybar/
