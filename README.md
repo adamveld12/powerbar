@@ -4,7 +4,7 @@
 [![Build Status](https://veldhousen.semaphoreci.com/badges/powerbar.svg?style=shields)](https://veldhousen.semaphoreci.com/projects/powerbar)
 [![Go Report Card](https://goreportcard.com/badge/github.com/adamveld12/powerbar)](https://goreportcard.com/report/github.com/adamveld12/powerbar)
 ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/adamveld12/powerbar)
-![AUR version](https://img.shields.io/aur/version/powerbar)
+[![AUR version](https://img.shields.io/aur/version/powerbar)](https://aur.archlinux.org/packages/powerbar/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 Configurable battery status module for [Waybar](). Uses UPower and [DBus](https://upower.freedesktop.org/docs/Device.html).
