@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"math"
 	"os"
 	"strings"
 )
@@ -28,6 +29,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "could not create dbus conn: %v\n", err)
 		os.Exit(-1)
 	}
+	defer pc.Close()
 
 	bs, err := pc.GetBatteryStatus()
 	if err != nil {
@@ -62,17 +64,13 @@ func applyFmt(str string, bs BatteryStatus) string {
 		eta = bs.TimeUntilFull
 	}
 
-	hours := "0"
-	if eta.Hours() >= 1 {
-		hours = fmt.Sprintf("%.0f", eta.Hours())
-	}
-
+	hours := math.Floor(eta.Hours())
 	mins := "0"
 	if eta.Minutes() >= 1 {
-		mins = fmt.Sprintf("%1.0f", eta.Minutes())
+		mins = fmt.Sprintf("%1.0f", eta.Minutes()-(hours*60))
 	}
 
-	result = strings.ReplaceAll(result, "{H}", hours)
+	result = strings.ReplaceAll(result, "{H}", fmt.Sprintf("%1.0f", hours))
 	result = strings.ReplaceAll(result, "{M}", mins)
 	result = strings.ReplaceAll(result, "{usage}", fmt.Sprintf("%.2f", bs.Usage))
 	result = strings.ReplaceAll(result, "{state}", fmt.Sprintf("%s", bs.State))

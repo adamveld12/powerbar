@@ -65,12 +65,10 @@ func NewPowerClient() (PowerClient, error) {
 	}
 
 	batteryObj := conn.Object("org.freedesktop.UPower", "/org/freedesktop/UPower/devices/battery_BAT0")
-	// acObj := conn.Object("org.freedesktop.UPower", "/org/freedesktop/UPower/line_power_AC")
 
 	return &powerDBusInterface{
 		Conn:   conn,
 		BatObj: batteryObj,
-		// ACObj:  acObj,
 	}, nil
 }
 
