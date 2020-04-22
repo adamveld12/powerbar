@@ -29,7 +29,6 @@ func main() {
 		fmt.Fprintf(os.Stderr, "could not create dbus conn: %v\n", err)
 		os.Exit(-1)
 	}
-	defer pc.Close()
 
 	bs, err := pc.GetBatteryStatus()
 	if err != nil {
