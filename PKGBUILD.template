@@ -50,6 +50,5 @@ pkgver() {
          return
     fi
 
-    local count=$(git rev-list --count HEAD)
-    echo ${VERSION}.${count}
+    echo ${VERSION}
 }
