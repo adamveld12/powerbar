@@ -13,7 +13,7 @@ const defaultFmtStr = "{capacity}% - {usage}W - {H}h {M}m"
 var Version = "localdev"
 
 func main() {
-	fs := flag.NewFlagSet(fmt.Sprintf("Powerbar version %s", Version), flag.ExitOnError)
+	fs := flag.NewFlagSet(fmt.Sprintf("Powerbar %s", Version), flag.ExitOnError)
 	dischargeStr := fs.String("discharging", defaultFmtStr, "format string")
 	chargeStr := fs.String("charging", defaultFmtStr, "format string")
 	fullStr := fs.String("full", defaultFmtStr, "format string")
